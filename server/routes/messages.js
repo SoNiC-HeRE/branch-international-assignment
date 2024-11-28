@@ -1,4 +1,4 @@
-import express from express;
+import express from 'express';
 import Message from '../models/Message.js';
 
 const router = express.Router(); 
@@ -35,4 +35,4 @@ router.patch('/:id', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;
