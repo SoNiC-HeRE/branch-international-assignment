@@ -2,9 +2,11 @@
   "name": "backend-server",
   "version": "1.0.0",
   "description": "backend-server-for-messaging-app",
-  "main": "index.js",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
