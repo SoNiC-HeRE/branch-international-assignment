@@ -17,7 +17,7 @@ const UserDashboardView = (props) => {
     const fetchUserTickets = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/ticket/user/${createdBy}`,
+          `http://localhost:5000/ticket/user/${createdBy}`
         );
         setUserTickets(response.data);
       } catch (error) {
@@ -49,10 +49,12 @@ const UserDashboardView = (props) => {
           <tbody>
             {userTickets.map((ticket) => (
               <tr key={ticket._id}>
-                <td><div style={{textAlign:'left', margin:'1%'}}>
-                  {ticket.important? <span>important</span>:<></>}
+                <td>
+                  <div style={{ textAlign: "left", margin: "1%" }}>
+                    {ticket.important ? <span>important</span> : <></>}
                   </div>
-                  {ticket.description.substring(0, 100)}</td>
+                  {ticket.description.substring(0, 100)}
+                </td>
                 <td>{ticket.status}</td>
                 <td>
                   <button onClick={() => handleViewTicket(ticket._id)}>
@@ -65,7 +67,10 @@ const UserDashboardView = (props) => {
         </table>
       )}
       <Routes>
-        <Route path="/user/ticket/:ticketId" element={<UserTicketView userId={props.userId} />} />
+        <Route
+          path="/user/ticket/:ticketId"
+          element={<UserTicketView userId={props.userId} />}
+        />
       </Routes>
     </div>
   );

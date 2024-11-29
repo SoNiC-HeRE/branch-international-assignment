@@ -7,19 +7,29 @@ import "../userPage/userCreateTicket/UserCreateTicket.scss";
 const UserLandingPage = (props) => {
   return (
     <div>
-      <h1 style={{marginTop:'4%'}}>Welcome To Our Customer Support</h1>
+      <h1 style={{ marginTop: "4%" }}>Welcome To Our Customer Support</h1>
       <ul>
         <li>
-          <Link className="link-style" to="/user/create"><h2>Create Ticket</h2></Link>
+          <Link className="link-style" to="/user/create">
+            <h2>Create Ticket</h2>
+          </Link>
         </li>
         <li>
-          <Link className="link-style" to="/user/dashboard"><h2>My Tickets</h2></Link>
+          <Link className="link-style" to="/user/dashboard">
+            <h2>My Tickets</h2>
+          </Link>
         </li>
       </ul>
       {/* Use Routes to handle navigation */}
       <Routes>
-        <Route path="/user/create" element={<UserCreateTicket userId={props.userId}/>} />
-        <Route path="/user/dashboard" element={<UserDashboard userId={props.userId}/>} />
+        <Route
+          path="/user/create"
+          element={<UserCreateTicket userId={props.userId} />}
+        />
+        <Route
+          path="/user/dashboard"
+          element={<UserDashboard userId={props.userId} />}
+        />
       </Routes>
     </div>
   );
