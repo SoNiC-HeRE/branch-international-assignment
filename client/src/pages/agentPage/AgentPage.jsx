@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import socket from "../../socket"; // Import Socket.IO client
+import socket from "../../socket";
 import "./AgentPage.scss";
 
 const AgentPage = () => {
   const [messages, setMessages] = useState([]); // All messages
-  const [selectedMessage, setSelectedMessage] = useState(null); // Current message being replied to
+  const [selectedMessage, setSelectedMessage] = useState(null); // Current conversation
   const [agentResponse, setAgentResponse] = useState(""); // Agent's response
 
-  // Fetch messages on load and set up socket listeners
   useEffect(() => {
     // Fetch all messages
     fetch("http://localhost:5000/api/messages")
@@ -15,31 +14,33 @@ const AgentPage = () => {
       .then((data) => setMessages(data))
       .catch((err) => console.error("Error fetching messages:", err));
 
-    // Listen for new messages
+    // Listen for real-time updates
     socket.on("newMessage", (newMessage) => {
       setMessages((prev) => [...prev, newMessage]);
     });
 
-    // Listen for message updates
     socket.on("messageUpdated", (updatedMessage) => {
       setMessages((prev) =>
         prev.map((msg) =>
           msg._id === updatedMessage._id ? updatedMessage : msg
         )
       );
+
+      // Update the selected message if it matches the updated message
+      if (selectedMessage && selectedMessage._id === updatedMessage._id) {
+        setSelectedMessage(updatedMessage);
+      }
     });
 
     return () => {
       socket.off("newMessage");
       socket.off("messageUpdated");
     };
-  }, []);
+  }, [selectedMessage]);
 
-  // Send agent's response
   const handleSendMessage = () => {
     if (!selectedMessage || !agentResponse.trim()) return;
 
-    // Update message in the database
     fetch(`http://localhost:5000/api/messages/${selectedMessage._id}`, {
       method: "PATCH",
       headers: {
@@ -49,9 +50,14 @@ const AgentPage = () => {
     })
       .then((res) => res.json())
       .then((updatedMessage) => {
-        socket.emit("updateMessage", updatedMessage); // Notify other agents
-        setAgentResponse(""); // Clear input
-        setSelectedMessage(null); // Clear selected message
+        // Optimistically update the selected message locally
+        setSelectedMessage(updatedMessage);
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg._id === updatedMessage._id ? updatedMessage : msg
+          )
+        );
+        setAgentResponse(""); // Clear the input field
       })
       .catch((err) => console.error("Error sending message:", err));
   };
@@ -74,11 +80,12 @@ const AgentPage = () => {
               <p>
                 <strong>Customer:</strong> {msg["Message Body"]}
               </p>
-              {msg.agentResponse && (
-                <p>
-                  <strong>Agent:</strong> {msg.agentResponse}
-                </p>
-              )}
+              {msg.agentResponse &&
+                msg.agentResponse.map((response, index) => (
+                  <p key={index}>
+                    <strong>Agent:</strong> {response}
+                  </p>
+                ))}
             </div>
           ))
         )}
@@ -87,18 +94,14 @@ const AgentPage = () => {
       {selectedMessage && (
         <div className="chat-box">
           <div className="chat-messages-div">
-            {messages
-              .filter((msg) => msg["User ID"] === selectedMessage["User ID"])
-              .map((msg, index) => (
-                <div
-                  key={index}
-                  className={`chat-bubble ${
-                    msg.agentResponse
-                      ? "agent-message"
-                      : "customer-message"
-                  }`}
-                >
-                  <p>{msg.agentResponse || msg["Message Body"]}</p>
+            {/* Display conversation */}
+            <div className="chat-bubble customer-message">
+              <p>{selectedMessage["Message Body"]}</p>
+            </div>
+            {selectedMessage.agentResponse &&
+              selectedMessage.agentResponse.map((response, index) => (
+                <div key={index} className="chat-bubble agent-message">
+                  <p>{response}</p>
                 </div>
               ))}
           </div>
