@@ -13,13 +13,34 @@
     padding: 1rem;
     overflow-y: scroll;
 
+    .message-list-header {
+      padding: 0rem 0.3rem;
+    }
+
     .message-item {
       padding: 0.5rem;
       border-bottom: 1px solid #eee;
       cursor: pointer;
+      height: 100px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      margin: 1rem 0rem;
 
-      &.selected {
+      &.message-item.selected {
         background-color: #f0f0f0;
+        border-left: 5px solid #000;
+      }
+
+      &.unread {
+        background-color: #f8d7da; // Red for unread messages
+        border-left: 5px solid #dc3545;
+      }
+
+      &.read {
+        background-color: #d1e7dd; // Green for read messages
+        border-left: 5px solid #28a745;
       }
     }
   }
@@ -34,7 +55,7 @@
       max-height: 400px;
       overflow-y: auto;
       padding: 10px;
-      background: #f1f1f1;
+      min-height: 89%;
       border: 1px solid #ccc;
       border-radius: 5px;
       display: flex;
@@ -48,19 +69,18 @@
       }
 
       .customer-message {
-        background: #d4edda;
+        background: #cccccc2b;
         align-self: flex-start;
       }
 
       .agent-message {
         background: #cce5ff;
-        align-self: flex-end;
+        align-self: flex-end;     
       }
     }
 
     .response-box {
       display: flex;
-      margin: 1rem;
       border-radius: 8px;
       justify-content: space-between;
 
@@ -74,6 +94,7 @@
       button {
         font-family: inherit;
         font-size: 20px;
+        height: 45px;
         background: royalblue;
         color: white;
         padding: 0.7em 1em;
@@ -81,7 +102,7 @@
         display: flex;
         align-items: center;
         border: none;
-        border-radius: 16px;
+        border-radius: 8px;
         overflow: hidden;
         transition: all 0.2s;
         cursor: pointer;
@@ -127,12 +148,10 @@
 
       .input {
         width: 100%;
-        padding-left: 1rem;
-        padding-top: 1rem;
-        border: 2px solid black;
+        padding: 0.6rem 0.3rem 0.2rem 0.5rem;
         border-radius: 10px;
+        border: 1px solid #ccc;
         outline: none;
-        background-color: #f8fafc;
         color: #0d0c22;
         transition: 0.5s ease;
         resize: none;

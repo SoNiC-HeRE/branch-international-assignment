@@ -65,7 +65,7 @@ const AgentPage = () => {
   return (
     <div className="agent-page">
       <div className="message-list">
-        <h2>Customer Messages</h2>
+        <h2 className="message-list-header">Customer Messages</h2>
         {messages.length === 0 ? (
           <p>No messages available.</p>
         ) : (
@@ -74,18 +74,24 @@ const AgentPage = () => {
               key={msg._id}
               className={`message-item ${
                 selectedMessage?._id === msg._id ? "selected" : ""
+              } ${
+                !msg.agentResponse || msg.agentResponse.length === 0
+                  ? "unread"
+                  : "read"
               }`}
               onClick={() => setSelectedMessage(msg)}
             >
               <p>
-                <strong>Customer:</strong> {msg["Message Body"]}
+                <strong>Customer ID: {msg["User ID"]}</strong>
               </p>
-              {msg.agentResponse &&
-                msg.agentResponse.map((response, index) => (
-                  <p key={index}>
-                    <strong>Agent:</strong> {response}
-                  </p>
-                ))}
+              <p>{msg["Message Body"]}</p>
+              {/* Display only the most recent agent response */}
+              {msg.agentResponse && msg.agentResponse.length > 0 && (
+                <p>
+                  <strong>Agent:</strong>{" "}
+                  {msg.agentResponse[msg.agentResponse.length - 1]}
+                </p>
+              )}
             </div>
           ))
         )}
