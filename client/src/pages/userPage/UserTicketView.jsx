@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./CreateTicketForm.css";
+import "../userPage/userCreateTicket/UserCreateTicket.scss";
 
 import { useNavigate } from "react-router-dom";
 
@@ -19,9 +19,7 @@ const UserTicketView = (props) => {
   useEffect(() => {
     const fetchTicket = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5000/ticket/${id}`,
-        );
+        const response = await axios.get(`http://localhost:5000/ticket/${id}`);
         setTicket(response.data);
         setEditedDescription(response.data.description);
       } catch (error) {
@@ -34,13 +32,10 @@ const UserTicketView = (props) => {
 
   const handleUpdate = async () => {
     try {
-      const response = await axios.patch(
-        `http://localhost:5000/ticket/${id}`,
-        {
-          description: editedDescription,
-          status: ticket.status
-        },
-      );
+      const response = await axios.patch(`http://localhost:5000/ticket/${id}`, {
+        description: editedDescription,
+        status: ticket.status,
+      });
       setTicket(response.data);
       setIsEditing(false);
       toast.success("Ticket Updated!");
@@ -52,9 +47,7 @@ const UserTicketView = (props) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(
-        `http://localhost:5000/ticket/${id}`,
-      );
+      await axios.delete(`http://localhost:5000/ticket/${id}`);
       toast.success("Ticket Deleted!");
       setTimeout(() => {
         // Navigate after waiting
@@ -85,23 +78,23 @@ const UserTicketView = (props) => {
         pauseOnHover
         theme="light"
       />
-      <h2 style={{ color: '#42d7f5', marginTop: '4%' }}>My Ticket</h2>
+      <h2 style={{ color: "#42d7f5", marginTop: "4%" }}>My Ticket</h2>
       {isEditing ? (
         <div className="update-ticket">
           <h2>Description:</h2>
-            <textarea
-              value={editedDescription}
-              onChange={(e) => setEditedDescription(e.target.value)}
-            />
-            <br></br>
+          <textarea
+            value={editedDescription}
+            onChange={(e) => setEditedDescription(e.target.value)}
+          />
+          <br></br>
           <button onClick={handleUpdate}>Update Ticket</button>
         </div>
       ) : (
         <>
           <div className="view-ticket">
-            <div style={{textAlign:'left', margin:'1%'}}>
-                  {ticket.important? <span>important</span>:<></>}
-                  </div>
+            <div style={{ textAlign: "left", margin: "1%" }}>
+              {ticket.important ? <span>important</span> : <></>}
+            </div>
             <p>Description: {ticket.description}</p>
             <p>Status: {ticket.status}</p>
             <p>Created By: {ticket.createdBy}</p>
@@ -120,11 +113,14 @@ const UserTicketView = (props) => {
                 Delete Ticket
               </button>
             )}
-            <button onClick={()=>navigate('/user/dashboard/*')}>Dashboard</button>
+            <button onClick={() => navigate("/user/dashboard/*")}>
+              Dashboard
+            </button>
             <br></br>
-            <button onClick={()=>navigate(`/user/chat/${id}`)}>Chat Online</button>
+            <button onClick={() => navigate(`/user/chat/${id}`)}>
+              Chat Online
+            </button>
           </div>
-
         </>
       )}
     </div>

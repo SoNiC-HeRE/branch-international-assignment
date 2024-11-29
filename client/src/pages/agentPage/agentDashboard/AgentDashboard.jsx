@@ -48,7 +48,7 @@ const AgentDashboard = () => {
 
   const handleViewTicket = (ticketId) => {
     // Redirect to the TicketView component with the specific ticket's ID
-    navigate(`/admin/ticket/${ticketId}`);
+    navigate(`/agent/ticket/${ticketId}`);
   };
 
   const handleStatusChange = (e) => {

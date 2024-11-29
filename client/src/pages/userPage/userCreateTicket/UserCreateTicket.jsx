@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./UserCreateTicket.css"; // Import CSS file
+import "./UserCreateTicket.scss"; // Import CSS file
 import { useNavigate } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -10,21 +10,17 @@ const UserCreateTicket = (props) => {
   const navigate = useNavigate();
   const [description, setDescription] = useState("");
   const [notification, setNotification] = useState(null);
-  const createdBy=props.userId
+  const createdBy = props.userId;
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
 
   const handleCreateTicket = async () => {
     try {
-      
-      await axios.post(
-        "http://localhost:5000/ticket/create",
-        {
-          description,
-          createdBy,
-        },
-      );
+      await axios.post("http://localhost:5000/ticket/create", {
+        description,
+        createdBy,
+      });
       toast.success("Ticket created successfully!");
 
       // Wait for some time (e.g., 2000 milliseconds or 2 seconds)
@@ -75,9 +71,14 @@ const UserCreateTicket = (props) => {
 
         {/* Display notification if it exists */}
         {notification && (
-          <div style={{margin:'2% auto'}} className={`notification ${notification.type}`}>
+          <div
+            style={{ margin: "2% auto" }}
+            className={`notification ${notification.type}`}
+          >
             {notification.message}
-            <button style={{padding:'1px 5px'}} onClick={closeNotification}>&times;</button>
+            <button style={{ padding: "1px 5px" }} onClick={closeNotification}>
+              &times;
+            </button>
           </div>
         )}
       </div>

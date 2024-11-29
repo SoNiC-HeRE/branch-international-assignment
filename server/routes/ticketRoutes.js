@@ -28,7 +28,9 @@ router.post("/create", async (req, res, next) => {
 router.get("/user/:createdBy", async (req, res, next) => {
   try {
     const { createdBy } = req.params;
-    const userTickets = await Ticket.find({ createdBy }).sort({ important: -1 });
+    const userTickets = await Ticket.find({ createdBy }).sort({
+      important: -1,
+    });
     res.status(200).json(userTickets);
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;
@@ -44,7 +46,9 @@ router.get("/search", async (req, res, next) => {
       $or: [
         { description: { $regex: exp, $options: "i" } },
         { createdBy: { $regex: exp, $options: "i" } },
-        { messages: { $elemMatch: { content: { $regex: exp, $options: "i" } } } },
+        {
+          messages: { $elemMatch: { content: { $regex: exp, $options: "i" } } },
+        },
       ],
     }).sort({ important: -1 });
 
