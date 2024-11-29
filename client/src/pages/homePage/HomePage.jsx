@@ -1,8 +1,8 @@
 import React from "react";
 import { nanoid } from 'nanoid';
 import { Link, Routes, Route } from "react-router-dom";
-import UserLandingPage from "../User/UserLandingPage";
-import AdminDashboard from "../Admin/AdminDashboard";
+import UserLandingPageView from "../userPage/UserLandingPage";
+import AgentDashboardView from "../agentPage/agentDashboard/AgentDashboard";
 import "./HomePage.scss";
 
 const HomePage = (props) => {
@@ -12,7 +12,7 @@ const HomePage = (props) => {
       <h1 style={{marginTop:'4%'}}>Company Customer Support</h1>
       <ul>
         <li>
-          <Link className="link-style" to="/admin/dashboard"><h2>Admin Dashboard</h2></Link>
+          <Link className="link-style" to="/agent/dashboard"><h2>Admin Dashboard</h2></Link>
         </li>
         <li>
           <Link className="link-style" to="/user/*"><h2>User Login</h2></Link>
@@ -20,8 +20,8 @@ const HomePage = (props) => {
       </ul>
       {/* Use Routes to handle navigation */}
       <Routes>
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/user/*" element={<UserLandingPage userId={unique_id}/>} />
+        <Route path="/agent/dashboard" element={<AgentDashboardView />} />
+        <Route path="/user/*" element={<UserLandingPageView userId={unique_id}/>} />
       </Routes>
     </div>
   );

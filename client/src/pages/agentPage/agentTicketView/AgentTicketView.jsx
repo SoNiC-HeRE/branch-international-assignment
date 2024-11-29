@@ -1,4 +1,4 @@
-// components/Admin/TicketView.js
+// components/agent/TicketView.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -85,8 +85,8 @@ const AgentTicketView = () => {
         </select>
         <button onClick={handleStatusChange}>Update Status</button>
       </label>
-      <button onClick={()=>navigate(`/admin/chat/${id}`)}>Solve Issue</button>
-      <button onClick={()=>navigate('/admin/dashboard')}>Dashboard</button>
+      <button onClick={()=>navigate(`/agent/chat/${id}`)}>Solve Issue</button>
+      <button onClick={()=>navigate('/agent/dashboard')}>Dashboard</button>
 
       </div>
     </div>

@@ -83,7 +83,7 @@ const AdminChat = (props) => {
                     onChange={(e) => setInputMessage(e.target.value)}
                 />
                 <button type="submit">Send</button>
-                <button onClick={()=>navigate('/admin/dashboard')}>Exit</button>
+                <button onClick={()=>navigate('/agent/dashboard')}>Exit</button>
             </form>
         </div>
     );

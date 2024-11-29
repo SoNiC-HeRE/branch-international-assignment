@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import UserTicketView from "./UserTicketView";
-import "./UserDashboardView.css";
+import UserTicketView from "../UserTicketView";
+import "./UserDashboardView.scss";
 
 const UserDashboardView = (props) => {
   const [userTickets, setUserTickets] = useState([]);

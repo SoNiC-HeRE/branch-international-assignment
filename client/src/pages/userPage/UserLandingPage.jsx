@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, Routes, Route } from "react-router-dom";
-import CreateTicketForm from "./CreateTicketForm";
-import UserDashboard from "./UserDashboard";
-import "./CreateTicketForm.css";
+import UserCreateTicket from "../userPage/userCreateTicket/UserCreateTicket";
+import UserDashboard from "../userPage/userDashboardView/UserDashboardView";
+import "../userPage/userCreateTicket/UserCreateTicket.scss";
 
 const UserLandingPage = (props) => {
   return (
@@ -18,7 +18,7 @@ const UserLandingPage = (props) => {
       </ul>
       {/* Use Routes to handle navigation */}
       <Routes>
-        <Route path="/user/create" element={<CreateTicketForm userId={props.userId}/>} />
+        <Route path="/user/create" element={<UserCreateTicket userId={props.userId}/>} />
         <Route path="/user/dashboard" element={<UserDashboard userId={props.userId}/>} />
       </Routes>
     </div>
