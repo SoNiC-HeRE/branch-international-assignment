@@ -1,5 +1,5 @@
 import express from "express";
-import Ticket from "../models/Ticket.js";
+import Ticket from "../models/TicketModel.js";
 
 const router = express.Router();
 

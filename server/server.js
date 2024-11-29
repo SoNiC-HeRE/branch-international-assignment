@@ -5,8 +5,8 @@ import http from "http";
 import { Server as socketIo } from "socket.io";
 import mongoose from "mongoose";
 
-import ticketRoute from "./routes/ticket.js";
-import Ticket from "./models/Ticket.js";
+import ticketRoute from "./routes/ticketRoutes.js";
+import Ticket from "./models/TicketModel.js";
 import { userJoin, getCurrentUser, userLeave } from "./utils/users.js";
 
 dotenv.config();
@@ -54,7 +54,7 @@ io.on("connection", (socket) => {
 
 // MongoDB connection
 mongoose
-  .connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected successfully"))
   .catch((err) => console.error(err));
 
