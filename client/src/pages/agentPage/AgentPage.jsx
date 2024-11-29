@@ -101,9 +101,11 @@ const AgentPage = () => {
         <div className="chat-box">
           <div className="chat-messages-div">
             {/* Display conversation */}
-            <div className="chat-bubble customer-message">
-              <p>{selectedMessage["Message Body"]}</p>
-            </div>
+
+              {selectedMessage["Message Body"]&& selectedMessage["Message Body"].map((message,idx)=>(
+                <div key={idx} className="chat-bubble customer-message"><p>{message}</p></div>
+              ))}
+
             {selectedMessage.agentResponse &&
               selectedMessage.agentResponse.map((response, index) => (
                 <div key={index} className="chat-bubble agent-message">

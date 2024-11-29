@@ -27,7 +27,7 @@ const HomePage = () => {
           <FaUserGroup
             size={180}
             className="user-icon"
-            onClick={()=>handleClick('/user')}
+            onClick={()=>handleClick('/verify/user')}
           />
         </div>
         <div>
