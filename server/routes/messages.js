@@ -35,29 +35,29 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Update a message with an agent's response
 router.patch("/:id", async (req, res) => {
   const { id } = req.params;
   const { agentResponse } = req.body;
 
   try {
-    const updatedMessage = await Message.findByIdAndUpdate(
-      id,
-      { agentResponse },
-      { new: true }
-    );
-
-    if (!updatedMessage) {
+    const message = await Message.findById(id);
+    if (!message) {
       return res.status(404).json({ error: "Message not found" });
     }
 
-    // Emit the updated message to all connected clients
-    req.io.emit("messageUpdated", updatedMessage);
+    // Append agentResponse
+    message.agentResponse = [...(message.agentResponse || []), agentResponse];
 
-    res.status(200).json(updatedMessage);
+    await message.save();
+
+    // Emit the updated message to all clients
+    req.io.emit("messageUpdated", message);
+
+    res.status(200).json(message);
   } catch (error) {
     res.status(500).json({ error: `Error updating message: ${error.message}` });
   }
 });
+
 
 export default router;
