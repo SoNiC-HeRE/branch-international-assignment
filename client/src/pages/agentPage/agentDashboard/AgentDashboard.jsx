@@ -57,27 +57,32 @@ const AgentDashboard = () => {
   };
 
   return (
-    <div>
-      <h2>Admin Dashboard</h2>
-      <label htmlFor="search">Search:</label>
-      <input
-        style={{ margin: "1%", width: "30%", padding: "0.5%" }}
-        id="search"
-        value={searchExp}
-        onChange={(e) => setSearchExp(e.target.value)}
-      ></input>
-      <label htmlFor="status">Filter by Status:</label>
-      <select
-        style={{ margin: "1%" }}
-        id="status"
-        onChange={handleStatusChange}
-        value={selectedStatus}
-      >
-        <option value="All">All</option>
-        <option value="Open">Open</option>
-        <option value="Pending">Pending</option>
-        <option value="Resolved">Resolved</option>
-      </select>
+    <div className="agent-dashboard-main">
+      <h2>Agent Dashboard</h2>
+      <div className="function-div">
+        <div className="search-div">
+          <label htmlFor="search">Search:</label>
+          <input
+            style={{ margin: "1%", width: "30%", padding: "0.5%" }}
+            id="search"
+            value={searchExp}
+            onChange={(e) => setSearchExp(e.target.value)}
+          ></input>
+        </div>
+        <div className="filter-div">
+          <label htmlFor="status">Filter by Status:</label>
+          <select
+            id="status"
+            onChange={handleStatusChange}
+            value={selectedStatus}
+          >
+            <option value="All">All</option>
+            <option value="Open">Open</option>
+            <option value="Pending">Pending</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+        </div>
+      </div>
 
       <table>
         <thead>
@@ -93,8 +98,10 @@ const AgentDashboard = () => {
           {tickets.map((ticket) => (
             <tr key={ticket._id}>
               <td>
-                <div style={{ textAlign: "left", margin: "1%" }}>
-                  {ticket.important ? <span>important</span> : null}
+                <div className="important-ticket">
+                  {ticket.important ? (
+                    <span className="important-ticket">Important</span>
+                  ) : null}
                 </div>
                 {ticket.description
                   ? ticket.description.substring(0, 100)
@@ -104,7 +111,10 @@ const AgentDashboard = () => {
               <td>{ticket.createdBy}</td>
               <td>{new Date(ticket.dateCreated).toLocaleString()}</td>
               <td>
-                <button onClick={() => handleViewTicket(ticket._id)}>
+                <button
+                  className="view-btn"
+                  onClick={() => handleViewTicket(ticket._id)}
+                >
                   View
                 </button>
               </td>
