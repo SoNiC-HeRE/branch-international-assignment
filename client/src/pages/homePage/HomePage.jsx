@@ -1,43 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
+import { nanoid } from 'nanoid';
+import { Link, Routes, Route } from "react-router-dom";
+import UserLandingPage from "../User/UserLandingPage";
+import AdminDashboard from "../Admin/AdminDashboard";
 import "./HomePage.scss";
-import { FaUserGroup } from "react-icons/fa6";
-import { MdOutlineInterpreterMode } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 
-const HomePage = () => {
-  const navigate = useNavigate();
-  const handleClick = (path) => {
-    navigate(path);
-  }
-
+const HomePage = (props) => {
+  const unique_id = nanoid(5);
   return (
-    <div className="outer-div">
-      <div className="card">
-        <div className="bg"></div>
-        <div className="blob"></div>
-      </div>
-      <div className="header-text-div">
-        <div className="header-text">
-          <div>Bolt</div>
-        </div>
-        <div className="header-subheading">Your one stop solution</div>
-      </div>
-      <div className="selector-div">
-        <div>
-          <FaUserGroup
-            size={180}
-            className="user-icon"
-            onClick={()=>handleClick('/verify/user')}
-          />
-        </div>
-        <div>
-          <MdOutlineInterpreterMode
-            size={180}
-            className="agent-icon"
-            onClick={()=>handleClick('/agent')}
-          />
-        </div>
-      </div>
+    <div>
+      <h1 style={{marginTop:'4%'}}>Company Customer Support</h1>
+      <ul>
+        <li>
+          <Link className="link-style" to="/admin/dashboard"><h2>Admin Dashboard</h2></Link>
+        </li>
+        <li>
+          <Link className="link-style" to="/user/*"><h2>User Login</h2></Link>
+        </li>
+      </ul>
+      {/* Use Routes to handle navigation */}
+      <Routes>
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/user/*" element={<UserLandingPage userId={unique_id}/>} />
+      </Routes>
     </div>
   );
 };
