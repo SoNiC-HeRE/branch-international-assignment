@@ -65,7 +65,7 @@ const UserTicketView = (props) => {
   }
 
   return (
-    <div>
+    <div className="ticket-view-div">
       <ToastContainer
         position="top-center"
         autoClose={2500}
@@ -92,34 +92,53 @@ const UserTicketView = (props) => {
       ) : (
         <>
           <div className="view-ticket">
-            <div style={{ textAlign: "left", margin: "1%" }}>
+            <div className="important-message">
               {ticket.important ? <span>important</span> : <></>}
             </div>
-            <p>Description: {ticket.description}</p>
-            <p>Status: {ticket.status}</p>
-            <p>Created By: {ticket.createdBy}</p>
-            <p>Date Created: {new Date(ticket.dateCreated).toLocaleString()}</p>
-            <button onClick={() => setIsEditing(true)}>Edit Details</button>
-            {isDeleteConfirmed ? (
-              <div>
-                <p>Are you sure you want to delete this ticket?</p>
-                <button onClick={handleDelete}>Confirm Delete</button>
-                <button onClick={() => setIsDeleteConfirmed(false)}>
-                  Cancel
+            <div className="combined-box">
+              <div className="header-text">Description:</div>
+              <p> {ticket.description}</p>
+            </div>
+            <div className="combined-box">
+              <div className="header-text">Date Created:</div>
+              <p> {new Date(ticket.dateCreated).toLocaleString()}</p>
+            </div>
+            <div className="combined-box">
+              <div className="header-text">Status:</div>
+              <p> {ticket.status}</p>
+            </div>
+            <div className="combined-box">
+              <div className="header-text">Created By:</div>
+              <p> {ticket.createdBy}</p>
+            </div>
+
+            <div className="button-div">
+              <button onClick={() => setIsEditing(true)}>Edit Details</button>
+              {isDeleteConfirmed ? (
+                <div className="delete-div">
+                  <p>Are you sure you want to delete this ticket?</p>
+                  <div className="inside-div">
+                    <button onClick={handleDelete}>Confirm Delete</button>
+                    <button onClick={() => setIsDeleteConfirmed(false)}>
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button onClick={() => setIsDeleteConfirmed(true)}>
+                  Delete Ticket
                 </button>
-              </div>
-            ) : (
-              <button onClick={() => setIsDeleteConfirmed(true)}>
-                Delete Ticket
+              )}
+            </div>
+            <div className="button-div">
+              <button onClick={() => navigate("/user/dashboard/*")}>
+                Dashboard
               </button>
-            )}
-            <button onClick={() => navigate("/user/dashboard/*")}>
-              Dashboard
-            </button>
-            <br></br>
-            <button onClick={() => navigate(`/user/chat/${id}`)}>
-              Chat Online
-            </button>
+              <br></br>
+              <button onClick={() => navigate(`/user/chat/${id}`)}>
+                Chat Online
+              </button>
+            </div>
           </div>
         </>
       )}

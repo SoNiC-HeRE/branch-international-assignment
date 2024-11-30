@@ -1,0 +1,111 @@
+.agent-dashboard-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  padding: 2rem;
+
+  table {
+    thead {
+      text-align: left;
+    }
+    tbody {
+      font-family: "Open Sans", sans-serif;
+      td {
+        padding: 0.5rem;
+        background-color: #f3f3f3;
+        text-align: start;
+
+        button {
+          background-color: #fff;
+          color: #3b82f6;
+          border: none;
+          cursor: pointer;
+          border-radius: 8px;
+          width: 100px;
+          height: 45px;
+          transition: 0.3s;
+        }
+
+        button:hover {
+          background-color: #3b82f6;
+          box-shadow: 0 0 0 5px #3b83f65f;
+          color: #fff;
+        }
+        .important-ticket {
+          span {
+            color: darkgreen;
+            background-color: lightgreen;
+            display: flex;
+            align-items: center;
+            width: 13%;
+            padding: 0.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  .function-div {
+    width: 100%;
+    padding: 0.8rem 2.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .search-div {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+
+      input {
+        border: 2px solid transparent;
+        min-width: 260px;
+        height: 2.5em;
+        padding-left: 0.8em;
+        outline: none;
+        overflow: hidden;
+        background-color: #f3f3f3;
+        border-radius: 4px;
+        transition: all 0.5s;
+      }
+
+      input:hover,
+      input:focus {
+        border: 2px solid #4a9dec;
+        box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+        background-color: white;
+      }
+    }
+
+    .filter-div {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+
+      select {
+        border: 2px solid transparent;
+        min-width: 260px;
+        height: 2.5em;
+        padding-left: 0.8em;
+        outline: none;
+        overflow: hidden;
+        background-color: #f3f3f3;
+        border-radius: 4px;
+        transition: all 0.5s;
+      }
+
+      select:hover,
+      select:focus {
+        border: 2px solid #4a9dec;
+        box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+        background-color: white;
+      }
+    }
+  }
+}
