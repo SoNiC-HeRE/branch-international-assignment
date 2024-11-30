@@ -49,7 +49,7 @@ In this project, you will address the challenge of handling a high volume of cus
 - Backend: Node.js, Express.js
 - Database: MongoDB
 - Real-time Updates: WebSockets (Socket.io)
-- Hosting: Local server / Deployed on [Your Hosting Platform]
+- Hosting: Local server 
 
 ## Setup Instructions
 - Prerequisites
@@ -76,7 +76,8 @@ Import the provided customer_messages.csv into your MongoDB database.
 ```
 - Configure the MongoDB URI in the .env file:
 ```    
-MONGODB_URI=mongodb://localhost:27017/bolt_cs_messaging
+PORT = 5000
+MONGODB_URI = mongodb+srv://sonic:sonic@branch-web-app-cluster.uv47e.mongodb.net/?retryWrites=true&w=majority&appName=branch-web-app-cluster / or your own MONGODB_URL
 ```
 - Run the Application
 ```
@@ -84,14 +85,16 @@ open separate terminals for client and server folders
 run
     - npm i
 run 
-    - npm start for server and npm run dev for client
+    - npm run start for server and npm run dev for client
 ```
 
 ## Code Walkthrough
 
-
+https://github.com/user-attachments/assets/d28c0245-1805-4892-a1ab-40c491f6ea70
 
 ## Video Demo:
+
+https://github.com/user-attachments/assets/7b3ddc16-6a14-4a8f-a206-04378886a305
 
 
 
