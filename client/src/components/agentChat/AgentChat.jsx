@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import "./AgentChat.scss";
 const socket = io("http://localhost:5000"); // Replace with your server URL
 
-const AdminChat = (props) => {
+const AgentChat = (props) => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const { id } = useParams();
@@ -47,35 +47,45 @@ const AdminChat = (props) => {
   };
 
   return (
-    <div>
-      <h1 style={{ margin: "2% auto" }}>Chat Online</h1>
-      <div className="container">
+    <div className="chat-outer">
+      <h1 className="chat-header"> Chat Online</h1>
+      <div className="chat-container">
         {messages.length > 0 ? (
-          <div>
+          <div className="messages">
             {messages.map((message, index) => {
               const dt = new Date(message.sentAt);
               return message.sentBy === "Staff" ? (
-                <div key={index} className="message-container">
+                <div
+                  key={index}
+                  className={`message ${
+                    message.sentBy === "Staff" ? "staff" : "user"
+                  }`}
+                >
                   <div className="staff">
-                    <p>{message.content}</p>
-                    <p style={{ fontSize: "smaller" }}>{dt.toLocaleString()}</p>
+                    <p className="message-content">{message.content}</p>
+                    <p className="message-timestamp">{dt.toLocaleString()}</p>
                   </div>
                 </div>
               ) : (
-                <div key={index} className="message-container">
+                <div
+                  key={index}
+                  className={`message ${
+                    message.sentBy === "Staff" ? "staff" : "user"
+                  }`}
+                >
                   <div className="user">
-                    <p>{message.content}</p>
-                    <p style={{ fontSize: "smaller" }}>{dt.toLocaleString()}</p>
+                    <p className="message-content">{message.content}</p>
+                    <p className="message-timestamp">{dt.toLocaleString()}</p>
                   </div>
                 </div>
               );
             })}
           </div>
         ) : (
-          <></>
+          <p className="no-messages">No messages yet</p>
         )}
       </div>
-      <div className="canned">
+      <div className="canned-messages">
         <span onClick={(e) => setInputMessage(e.target.textContent)}>
           Hi there, please provide more details
         </span>
@@ -86,17 +96,25 @@ const AdminChat = (props) => {
           Please provide your valuable feedback
         </span>
       </div>
-      <form onSubmit={handleSendMessage}>
+      <form className="chat-form" onSubmit={handleSendMessage}>
         <input
+          className="chat-input"
           type="text"
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
         />
-        <button type="submit">Send</button>
-        <button onClick={() => navigate("/agent/dashboard")}>Exit</button>
+        <button className="chat-send-btn" type="submit">
+          Send
+        </button>
+        <button
+          className="chat-exit-btn"
+          onClick={() => navigate("/agent/dashboard")}
+        >
+          Exit
+        </button>
       </form>
     </div>
   );
 };
 
-export default AdminChat;
+export default AgentChat;
