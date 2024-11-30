@@ -45,7 +45,7 @@ const AgentTicketView = () => {
   }
 
   return (
-    <div>
+    <div className="ticket-view-div">
       <ToastContainer
         position="top-center"
         autoClose={2500}
@@ -58,17 +58,30 @@ const AgentTicketView = () => {
         pauseOnHover
         theme="light"
       />
-      <h2 style={{ color: "#42d7f5", marginTop: "4%" }}>Ticket</h2>
+      <h2>Ticket</h2>
       <div className="view-ticket">
-        <div style={{ textAlign: "left", margin: "1%" }}>
+        <div className="important-message">
           {ticket.important ? <span>important</span> : <></>}
         </div>
-        <p>Description: {ticket.description}</p>
-        <p>Status: {ticket.status}</p>
-        <p>Created By: {ticket.createdBy}</p>
-        <p>Date Created: {new Date(ticket.dateCreated).toLocaleString()}</p>
+        <div className="combined-box">
+          <div className="header-text">Description:</div>
+          <p> {ticket.description}</p>
+        </div>
+        <div className="combined-box">
+          <div className="header-text">Status:</div>
+          <p> {ticket.status}</p>
+        </div>
+        <div className="combined-box">
+          <div className="header-text">Created By: </div>
+          <p>{ticket.createdBy}</p>
+        </div>
+        <div className="combined-box">
+          <div className="header-text">Date Created:</div>
+          <p> {new Date(ticket.dateCreated).toLocaleString()}</p>
+        </div>
+
         {/* Update Status */}
-        <label>
+        <label className="label-text">
           Update Status:
           <select
             style={{ margin: "2%" }}
@@ -81,10 +94,14 @@ const AgentTicketView = () => {
           </select>
           <button onClick={handleStatusChange}>Update Status</button>
         </label>
-        <button onClick={() => navigate(`/agent/chat/${id}`)}>
-          Solve Issue
-        </button>
-        <button onClick={() => navigate("/agent/dashboard")}>Dashboard</button>
+        <div className="button-div">
+          <button onClick={() => navigate(`/agent/chat/${id}`)}>
+            Solve Issue
+          </button>
+          <button onClick={() => navigate("/agent/dashboard")}>
+            Dashboard
+          </button>
+        </div>
       </div>
     </div>
   );
