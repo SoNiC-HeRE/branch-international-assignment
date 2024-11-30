@@ -8,8 +8,6 @@ const UserDashboardView = (props) => {
   const [userTickets, setUserTickets] = useState([]);
   const navigate = useNavigate();
 
-  // Hardcoded createdBy value
-  //const createdBy =  'PMHlz'
   const createdBy = props.userId;
 
   useEffect(() => {
