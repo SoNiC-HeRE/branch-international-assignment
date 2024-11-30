@@ -34,7 +34,7 @@ const UserDashboardView = (props) => {
   };
 
   return (
-    <div>
+    <div className="user-dashboard-main">
       <h1>User Dashboard</h1>
       <h4>Showing tickets created by: {createdBy}</h4>
       {userTickets.length > 0 && (
@@ -50,7 +50,7 @@ const UserDashboardView = (props) => {
             {userTickets.map((ticket) => (
               <tr key={ticket._id}>
                 <td>
-                  <div style={{ textAlign: "left", margin: "1%" }}>
+                  <div className="important-ticket">
                     {ticket.important ? <span>important</span> : <></>}
                   </div>
                   {ticket.description.substring(0, 100)}

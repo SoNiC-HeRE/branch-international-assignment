@@ -46,26 +46,31 @@ const UserCreateTicket = (props) => {
   };
 
   return (
-    <div className="create-ticket-container2">
-      <div className="create-ticket-container">
-        <ToastContainer
-          position="top-center"
-          autoClose={2500}
-          hideProgressBar={true}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-        {/* Apply CSS class to the main container */}
-        <h1>Create Ticket</h1>
-        <label>
-          Description:
+    <div className="create-ticket-background">
+      <div class="card">
+        <div class="bg"></div>
+        <div class="blob"></div>
+      </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={2500}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Apply CSS class to the main container */}
+      <div className="ticket-create-content">
+        <h1 className="ticket-create-header">Create Ticket</h1>
+        <div className="desc-box">
+          <label className="label-text">Description:</label>
           <textarea value={description} onChange={handleDescriptionChange} />
-        </label>
+        </div>
+
         <br />
         <button onClick={handleCreateTicket}>Create Ticket</button>
 
