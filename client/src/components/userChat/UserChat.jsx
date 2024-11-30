@@ -47,42 +47,60 @@ const UserChat = () => {
   };
 
   return (
-    <div>
-      <h1 style={{ margin: "2% auto" }}>Chat Online</h1>
-      <div className="container">
+    <div className="chat-outer">
+      <h1 className="chat-header">Chat Online</h1>
+      <div className="chat-container">
         {messages.length > 0 ? (
-          <div>
+          <div className="messages">
             {messages.map((message, index) => {
               const dt = new Date(message.sentAt);
               return message.sentBy === "User" ? (
-                <div key={index} className="message-container">
+                <div
+                  key={index}
+                  className={`message ${
+                    message.sentBy === "User" ? "staff" : "user"
+                  }`}
+                >
                   <div className="user-chat">
-                    <p>{message.content}</p>
-                    <p style={{ fontSize: "smaller" }}>{dt.toLocaleString()}</p>
+                    <p className="message-content">{message.content}</p>
+                    <p className="message-timestamp">{dt.toLocaleString()}</p>
                   </div>
                 </div>
               ) : (
-                <div key={index} className="message-container">
-                  <div className="staff-chat">
-                    <p>{message.content}</p>
-                    <p style={{ fontSize: "smaller" }}>{dt.toLocaleString()}</p>
+                <div
+                  key={index}
+                  className={`message ${
+                    message.sentBy === "User" ? "staff" : "user"
+                  }`}
+                >
+                  <div className="user-chat">
+                    <p className="message-content">{message.content}</p>
+                    <p className="message-timestamp">{dt.toLocaleString()}</p>
                   </div>
                 </div>
               );
             })}
           </div>
         ) : (
-          <></>
+          <p className="no-messages">No messages yet</p>
         )}
       </div>
-      <form onSubmit={handleSendMessage}>
+      <form className="chat-form" onSubmit={handleSendMessage}>
         <input
           type="text"
+          className="chat-input"
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
         />
-        <button type="submit">Send</button>
-        <button onClick={() => navigate("/user/dashboard/*")}>Exit</button>
+        <button className="chat-send-btn" type="submit">
+          Send
+        </button>
+        <button
+          className="chat-exit-btn"
+          onClick={() => navigate("/user/dashboard/*")}
+        >
+          Exit
+        </button>
       </form>
     </div>
   );
